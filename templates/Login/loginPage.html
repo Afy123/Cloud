@@ -1,0 +1,73 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static 'homePage\assets\img\favicon-v.png' %}">
+    <title>Login Page</title>
+    <!-- Simple bar CSS -->
+    <link rel="stylesheet" href="{% static 'registration/assets/css/simplebar.css' %}">
+    <!-- Fonts CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="{% static 'registration/assets/css/feather.css' %}">
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" href="{% static 'registration/assets/css/daterangepicker.css' %}">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="{% static 'registration/assets/css/app-light.css' %}" id="lightTheme">
+    <link rel="stylesheet" href="{% static 'registration/assets/css/app-dark.css' %}" id="darkTheme" disabled>
+  </head>
+  <body class="light ">
+    <div class="wrapper vh-100">
+      <div class="row align-items-center h-100">
+        <form class="col-lg-3 col-md-4 col-10 mx-auto text-center" method="post">
+          {% csrf_token %}
+          <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="./index.html">
+             <h1 class="logo me-auto">
+              <a href="#" class="logo me-auto"><img src="{% static 'homePage\assets\img\vault-login-blue.png' %}" style="width:200px; padding:20px 20px; " alt="" class="img-fluid"></a>
+              </h1>
+          </a>
+          <h1 class="h3 mb-3">Login Page</h1>
+          <div class="form-group">
+            <label for="inputText" class="sr-only">Username</label>
+            <input type="text" id="inputText" class="form-control form-control-lg" placeholder="Username" name="username" required="" autofocus="">
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control form-control-lg" placeholder="Password" name="password" required="">
+          </div>
+          <div>
+           <p>Don't Have an account ? <a href="{% url 'choice_page' %}">Click Here</a></p>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Let me in</button>
+          <p class="mt-5 mb-3 text-muted">© 2022</p>
+        </form>
+      </div>
+    </div>
+    <script src="{% static 'registration/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'registration/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'registration/assets/js/moment.min.js' %}"></script>
+    <script src="{% static 'registration/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'registration/assets/js/simplebar.min.js' %}"></script>
+    <script src="{% static 'registration/assets/js/daterangepicker.js' %}"></script>
+    <script src="{% static 'registration/assets/js/jquery.stickOnScroll.js' %}"></script>
+    <script src="{% static 'registration/assets/js/tinycolor-min.js' %}"></script>
+    <script src="{% static 'registration/assets/js/config.js' %}"></script>
+    <script src="{% static 'registration/assets/js/apps.js' %}"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag()
+      {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-56159088-1');
+    </script>
+  </body>
+</html>
