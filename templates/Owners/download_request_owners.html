@@ -17,7 +17,7 @@
                   </div>
                 </div>
               </div>
-                {% for i in view_file %}
+                {% for i in download_view_owners %}
             </div>
 
             <div class="clearfix"></div>
@@ -52,10 +52,10 @@
                             <div class="well profile_view">
                                 <div class="col-sm-12">
                                     <div class="left col-xs-7">
-                                        <h2>{{i.Name}}</h2>
+                                        <h2>{{i.Receiver.Name}}</h2>
                                         <ul class="list-unstyled">
-                                            <li><i class="fa fa-building"></i> Files : <img src="{{ i.Files.url }}" class="image_responsive" height="100px" width="100px"></li>
-                                            <a>{{ i.Files.url }}</a>
+                                            <li><i class="fa fa-building"></i> Files : <img src="{{ i.Upload.Files.url }}" class="image_responsive" height="100px" width="100px"></li>
+                                            <a>{{ i.Upload.Files.url }}</a>
 
                                         </ul>
                                     </div>
@@ -65,10 +65,14 @@
                                 </div>
                                 <div class="col-xs-12 bottom text-center">
                                     <div class="col-xs-12 col-sm-6 emphasis">
-                                        <a href="{{i.Files.url}}"  download type="button" class="btn btn-primary btn-xs">
-                                            <i class="fa fa-user"> </i> DOWNLOAD
-                                        </a>
+<!--                                        <a href="#"  type="button" class="btn btn-primary btn-xs">-->
+<!--                                            <i class="fa fa-user"> </i>Download Request Pending-->
+<!--                                        </a>-->
+                                            {% if i.Status == 1 %}
+                                              <a href="#" class="btn btn-outline-success btn-sm">Confirmed Download</a>
+
                                     </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

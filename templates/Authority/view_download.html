@@ -1,4 +1,4 @@
-{% extends 'Owners/owners.html' %}
+{% extends 'Authority/authority.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
@@ -17,7 +17,7 @@
                   </div>
                 </div>
               </div>
-                {% for i in view_file %}
+                {% for i in view_download_request %}
             </div>
 
             <div class="clearfix"></div>
@@ -52,10 +52,10 @@
                             <div class="well profile_view">
                                 <div class="col-sm-12">
                                     <div class="left col-xs-7">
-                                        <h2>{{i.Name}}</h2>
+                                        <h2>Reciever Name : {{i.Receiver.Name}}</h2>
+                                        <h2>Owner Name : {{i.Upload.Owner.Name}}</h2>
                                         <ul class="list-unstyled">
-                                            <li><i class="fa fa-building"></i> Files : <img src="{{ i.Files.url }}" class="image_responsive" height="100px" width="100px"></li>
-                                            <a>{{ i.Files.url }}</a>
+                                            <li><i class="fa fa-building"></i> Files : <img src="{{ i.Upload.Files.url }}" class="image_responsive" height="100px" width="100px"></li>
 
                                         </ul>
                                     </div>
@@ -65,10 +65,18 @@
                                 </div>
                                 <div class="col-xs-12 bottom text-center">
                                     <div class="col-xs-12 col-sm-6 emphasis">
-                                        <a href="{{i.Files.url}}"  download type="button" class="btn btn-primary btn-xs">
-                                            <i class="fa fa-user"> </i> DOWNLOAD
-                                        </a>
+<!--                                        <a href="#"  type="button" class="btn btn-primary btn-xs">-->
+<!--                                            <i class="fa fa-user"> </i>Download Request Pending-->
+<!--                                        </a>-->
+                                  {% if i.Status == 0 %}
+								  <a href="{% url 'confirm_download' i.id %}" class="text-success">Confirm</a>/
+							 	  <a href="{% url 'reject_download' i.id %}"class="text-danger">Reject</a>
+							      {% elif i.Status == 1 %}
+							      <button type="submit" value="Approval Confirmed" class="btn btn-success">Download Confirmed</button>
+					              {% elif i.Status == 2 %}
+							      <button type="submit" value="Reject" class="btn btn-danger"> Download Rejected</button>
                                     </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

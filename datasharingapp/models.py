@@ -32,19 +32,13 @@ class Receiver(models.Model):
 
 class Upload(models.Model):
     User = models.ForeignKey(Login, on_delete=models.CASCADE)
-    Name = models.CharField(max_length=200)
-    Email = models.EmailField()
-    Contact_No = PhoneNumberField(unique=True, null=False, blank=False)
-    Address = models.CharField(max_length=200)
-    Files = models.FileField(upload_to="files", unique=True)
-
-    def __str__(self):
-        return self.Name
+    Owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
+    Title = models.CharField(max_length=200)
+    Description = models.CharField(max_length=200)
+    Files = models.FileField(upload_to="", unique=True)
 
 
-class Complaint(models.Model):
-    User = models.ForeignKey(Login, on_delete=models.CASCADE)
-    Subject = models.CharField(max_length=200)
-    Complaint = models.TextField()
-    Date = models.DateField()
-    Reply = models.TextField(null=True, blank=True)
+class Download(models.Model):
+    Receiver = models.ForeignKey(Receiver, on_delete=models.CASCADE)
+    Upload = models.ForeignKey(Upload, on_delete=models.CASCADE)
+    Status = models.IntegerField(default=0)

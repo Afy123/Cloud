@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 
-from datasharingapp.forms import ComplaintForm
-from datasharingapp.models import Receiver, Upload, Complaint
+from datasharingapp.models import Receiver, Upload, Download, Owner
 
 
 def profile_view_reciever(request):
@@ -15,22 +14,23 @@ def view_file_reciever(request):
     return render(request, 'Recievers/view_files_recievers.html', {'view_file_recievers': f})
 
 
-def complaint_view_reciever(request):
-    u = request.user
-    c = Complaint.objects.filter(User=u)
-    return render(request, 'Recievers/complaint_view_recievers.html', {'complaint_recievers': c})
+def download_view_reciever(request):
+    u = Receiver.objects.get(User=request.user)
+    d = Download.objects.filter(Receiver=u)
+    return render(request, 'Recievers/download_requests_recievers.html', {'download_view_reciever': d})
 
 
-def complaint_add_reciever(request):
-    form = ComplaintForm()
-    u = request.user
-    if request.method == 'POST':
-        form = ComplaintForm(request.POST)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.User = u
-            form.save()
-            return redirect('complaint_add_reciever')
+def download_request_receiver(request, id):
+    upload = Upload.objects.get(id=id)
+    r = Receiver.objects.get(User=request.user)
+    download = Download.objects.filter(Receiver=r, Upload=upload)
+    if download.exists():
+        return redirect('download_view_reciever')
     else:
-        return render(request, 'Recievers/complaint_register_recievers.html', {'form': form})
-
+        if request.method == 'POST':
+            obj = Download()
+            obj.Receiver = r
+            obj.Upload = upload
+            obj.save()
+            return redirect('download_view_reciever')
+    return render(request, 'Recievers/download_verify_recievers.html', {'Upload': upload, 'Receiver': r})

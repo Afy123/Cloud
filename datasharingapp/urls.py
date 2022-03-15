@@ -19,20 +19,21 @@ urlpatterns = [
     path('profile_view_owner', owner_views.profile_view_owner, name='profile_view_owner'),
     path('view_file', owner_views.view_file, name='view_file'),
     path('upload_files', owner_views.upload_files, name='upload_files'),
-    path('complaint_view_owners', owner_views.complaint_view, name='complaint_view_owners'),
-    path('complaint_register_owners', owner_views.complaint_add, name='complaint_register_owners'),
+    path('download_request_owner', owner_views.download_request_owner, name='download_request_owner'),
 
 
     path('profile_view_reciever', recievers_views.profile_view_reciever, name='profile_view_reciever'),
     path('view_file_recievers', recievers_views.view_file_reciever, name='view_file_recievers'),
-    path('complaint_view_reciever', recievers_views.complaint_view_reciever, name='complaint_view_reciever'),
-    path('complaint_add_reciever', recievers_views.complaint_add_reciever, name='complaint_add_reciever'),
+    path('download_view_reciever', recievers_views.download_view_reciever, name='download_view_reciever'),
+    path('download_request_receiver/<int:id>/', recievers_views.download_request_receiver, name='download_request_receiver'),
 
 
     path('view_owner', authority_views.view_owner, name='view_owner'),
     path('view_reciever', authority_views.view_reciever, name='view_reciever'),
     path('view_upload', authority_views.view_upload, name='view_upload'),
-    # path('encrypt', enc_views.encrypt, name='encrypt'),
+    path('view_download_request', authority_views.view_download_request, name='view_download_request'),
+    path('confirm_download/<int:id>/', authority_views.confirm_download, name='confirm_download'),
+    path('reject_download/<int:id>/', authority_views.reject_download, name='reject_download'),
 
 
 

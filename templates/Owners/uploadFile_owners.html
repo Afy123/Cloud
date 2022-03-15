@@ -49,9 +49,17 @@
                     <!-- Very Important csrf Token -->
                     {% csrf_token %}
                     <h6>
-                        {{form|crispy}}
+                        {{form.Title|as_crispy_field}}
                     </h6>
-
+                    <h6>
+                        {{form.Description|as_crispy_field}}
+                    </h6>
+                    <h6>
+                        {{form.Files|as_crispy_field}}
+                    </h6>
+                    <h6>
+                        {{form.Owner|as_crispy_field}}
+                    </h6>
                     <input type="submit" class="btn btn-primary btn-lg" name="Files">
                 </form>
                     <br />

@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 from phonenumber_field.modelfields import PhoneNumberField
 
-from datasharingapp.models import Login, Owner, Receiver, Upload, Complaint
+from datasharingapp.models import Login, Owner, Receiver, Upload
 from datasharingpro import settings
 
 
@@ -45,31 +45,17 @@ class UploadForm(forms.ModelForm):
     class Meta:
         model = Upload
         fields = [
-            'Name',
-            'Email',
-            'Contact_No',
-            'Address',
+            'Owner',
+            'Title',
+            'Description',
             'Files'
         ]
 
-        # def clean_my_file(self):
-        #     Files = self.cleaned_data.get("Files", False)
-        #     destination = settings.MEDIA_ROOT + 'media/files/'
-        #     if os.path.isfile(destination + Upload.Files):
-        #         raise forms.ValidationError(
-        #             'A file with the name' + Upload.Files + ' already exists. Please, rename your file and try again.')
-        #     else:
-        #         return Files
-
-        # def clean_file(self):
-        #     Files = self.cleaned_data.get('Files')
-        #     for instance in Upload.objects.all():
-        #         if instance.Files == Files:
-        #             raise forms.ValidationError('File already exists' + Files)
-        #     return Files
+        def clean_file(self):
+            Files = self.cleaned_data.get('Files')
+            for instance in Upload.objects.all():
+                if instance.Files.url == Files.url:
+                    raise forms.ValidationError('File already exists :' + Files.url)
+            return Files
 
 
-class ComplaintForm(forms.ModelForm):
-    class Meta:
-        model = Complaint
-        fields = ('Subject', 'Complaint', 'Date')
